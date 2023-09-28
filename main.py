@@ -16,7 +16,7 @@ async def main() -> None:
     await dp.start_polling(bot)
 
 
-@dp.message(Command("help"))
+@dp.message(Command("help", "start"))
 async def help(message: types.Message):
     await message.answer("This is a bot for tagging admins in Telegram supergroups based on their custom title.\n"
                          "E.g. to tag all admins you can write one of these examples:\n"
