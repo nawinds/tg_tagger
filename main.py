@@ -16,6 +16,33 @@ async def main() -> None:
     await dp.start_polling(bot)
 
 
+@dp.message(Command("help"))
+async def help(message: types.Message):
+    await message.answer("This is a bot for tagging admins in Telegram supergroups based on their custom title.\n"
+                         "E.g. to tag all admins you can write one of these examples:\n"
+                         "- /all <...>\n"
+                         "- /t all <...>\n"
+                         "- /group all <...>\n"
+                         "- /t all, <...>\n"
+                         "- /group all, <...>\n"
+                         "\n"
+                         "If some of your admins have the same title \"A room\", "
+                         "you can try these commands to tag them:\n"
+                         "- /t A <...>\n"
+                         "- /group A <...>\n"
+                         "- /t A, <...>\n"
+                         "- /group A room <...>\n"
+                         "\n"
+                         "---\n"
+                         "If you would like to make a bot of your own, "
+                         "you can view and run the code in [main.py]"
+                         "(https://github.com/nawinds/tg_tagger/blob/master/main.py) file. [Full source code]"
+                         "(https://github.com/nawinds/tg_tagger)\n"
+                         "\n"
+                         "Feel free to write me! My contacts are on my [nawinds.top](https://nawinds.top) website.",
+                         parse_mode="markdown")
+
+
 @dp.message(Command("group", "all", "t"), F.chat.type == "supergroup")
 async def tag(message: types.Message):
     admins = await message.chat.get_administrators()
